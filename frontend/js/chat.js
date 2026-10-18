@@ -19,9 +19,12 @@ async function initChat() {
   
   setupNavbar(currentUser);
 
-  // 2. Connect to Socket.IO
-    // 2. Connect to Socket.IO (Pointing to backend on port 5000)
-  socket = io('http://localhost:5000', {
+  // 2. Connect to Socket.IO (Dynamic URL for Local vs Production)
+  const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000'
+    : 'https://chat-app-backend-y02z.onrender.com'; // Your live Render URL
+
+  socket = io(backendUrl, {
     auth: { token: getToken() }
   });
 
