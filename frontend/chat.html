@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat — Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Custom Chat Layout CSS */
+    body { overflow: hidden; padding: 0; display: block; }
+    .chat-layout { display: flex; height: calc(100vh - 73px); max-width: 1200px; margin: 0 auto; background: var(--glass-bg); border-left: 1px solid var(--glass-border); border-right: 1px solid var(--glass-border); }
+    
+    /* Sidebar */
+    .chat-sidebar { width: 300px; border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; background: rgba(10,10,26,0.5); }
+    .chat-sidebar-header { padding: 20px; border-bottom: 1px solid var(--glass-border); font-weight: 700; font-size: 18px; }
+    .users-list { flex: 1; overflow-y: auto; }
+    .user-item { display: flex; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; transition: background 0.2s; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .user-item:hover { background: rgba(255,255,255,0.05); }
+    .user-item.active { background: rgba(139,92,246,0.15); border-left: 3px solid var(--violet); }
+    .user-info h4 { margin: 0; font-size: 15px; font-weight: 600; color: var(--text-primary); }
+    .user-info p { margin: 0; font-size: 12px; color: var(--text-secondary); }
+    
+    /* Online Dot */
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #71717a; }
+    .status-dot.online { background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .avatar-wrapper { position: relative; }
+    .avatar-wrapper .status-dot { position: absolute; bottom: 0; right: -2px; border: 2px solid #0a0a1a; }
+
+    /* Chat Area */
+    .chat-area { flex: 1; display: flex; flex-direction: column; background: rgba(0,0,0,0.2); }
+    .chat-header { padding: 16px 24px; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 12px; }
+    .chat-header h3 { margin: 0; font-size: 16px; }
+    
+    .messages-container { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+    .msg { max-width: 70%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.4; }
+    .msg.sent { align-self: flex-end; background: linear-gradient(135deg, var(--violet), var(--pink)); color: white; border-bottom-right-radius: 4px; }
+    .msg.received { align-self: flex-start; background: rgba(255,255,255,0.1); color: var(--text-primary); border-bottom-left-radius: 4px; }
+    
+    .chat-input-area { padding: 20px; border-top: 1px solid var(--glass-border); display: flex; gap: 12px; }
+    .chat-input-area input { flex: 1; border-radius: 24px; padding: 14px 20px; }
+    .chat-input-area button { padding: 14px 24px; border-radius: 24px; font-size: 15px; }
+    
+    .empty-state { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; color: var(--text-secondary); gap: 12px; }
+    .empty-state span { font-size: 48px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="dashboard.html" class="nav-brand">
+      <span class="nav-logo">💬</span>
+      <span>Chat App</span>
+    </a>
+    <div class="nav-user">
+      <div class="avatar" id="navAvatar">?</div>
+      <span class="nav-username" id="navUsername">Loading...</span>
+      <button class="nav-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="chat-layout">
+    <!-- Sidebar -->
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-header">Direct Messages</div>
+      <div class="users-list" id="usersList">
+        <!-- Users injected here -->
+      </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+      <div id="noChatSelected" class="empty-state">
+        <span>💬</span>
+        <h3>Select a user to start chatting</h3>
+      </div>
+
+      <div id="activeChat" style="display: none; flex-direction: column; height: 100%;">
+        <div class="chat-header">
+          <div class="avatar-wrapper">
+            <div class="avatar" id="chatAvatar">?</div>
+            <div class="status-dot" id="chatStatusDot"></div>
+          </div>
+          <div>
+            <h3 id="chatName">User</h3>
+            <p id="chatStatusText" style="margin: 0; font-size: 12px; color: var(--text-secondary);">Offline</p>
+          </div>
+        </div>
+
+        <div class="messages-container" id="messagesContainer">
+          <!-- Messages injected here -->
+        </div>
+
+        <div class="chat-input-area">
+          <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off">
+          <button onclick="sendMessage()" id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://localhost:5000/socket.io/socket.io.js"></script><!-- Load Socket.IO client -->
+  <script src="js/config.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="dashboard.html" class="nav-brand">
+      <span class="nav-logo">💬</span>
+      <span>Chat App</span>
+    </a>
+
+    <div class="nav-user">
+      <div class="avatar" id="navAvatar">?</div>
+      <span class="nav-username" id="navUsername">Loading...</span>
+      <button class="nav-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard" style="max-width: 640px;">
+    <div class="auth-container" style="max-width: 100%; margin: 0 auto;">
+      <div style="text-align: center;">
+        <div class="avatar" id="bigAvatar"
+             style="width: 96px; height: 96px; font-size: 32px; margin: 0 auto 20px;">
+          ?
+        </div>
+      </div>
+
+      <h2 style="text-align: center;">Your Profile</h2>
+      <p class="subtitle" style="text-align: center; margin-bottom: 0;">
+        Edit your info and save.
+      </p>
+
+      <form id="profileForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username"
+                 placeholder="alice" required minlength="3">
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email (read-only)</label>
+          <input type="email" id="email" name="email" readonly
+                 style="opacity: 0.6; cursor: not-allowed;">
+        </div>
+
+        <div class="input-group">
+          <label for="phone">Phone (read-only)</label>
+          <input type="text" id="phone" name="phone" readonly
+                 style="opacity: 0.6; cursor: not-allowed;">
+        </div>
+
+        <div class="input-group">
+          <label for="bio">Bio</label>
+          <input type="text" id="bio" name="bio"
+                 placeholder="Tell us about yourself (max 200 chars)"
+                 maxlength="200">
+        </div>
+
+        <div class="input-group">
+          <label for="avatar">Avatar URL (optional)</label>
+          <input type="url" id="avatar" name="avatar"
+                 placeholder="https://example.com/avatar.jpg">
+        </div>
+
+        <button type="submit" id="submitBtn">Save Changes</button>
+      </form>
+
+      <p id="msg"></p>
+
+      <div class="auth-footer">
+        <a href="dashboard.html">← Back to dashboard</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

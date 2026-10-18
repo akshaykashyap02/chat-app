@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="dashboard.html" class="nav-brand">
+      <span class="nav-logo">💬</span>
+      <span>Chat App</span>
+    </a>
+
+    <div class="nav-user">
+      <div class="avatar" id="navAvatar">?</div>
+      <span class="nav-username" id="navUsername">Loading...</span>
+      <button class="nav-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard" style="max-width: 1000px;">
+    <div class="welcome-card" style="margin-bottom: 24px;">
+      <div class="welcome-text">
+        <h1>👑 Admin Control Panel</h1>
+        <p class="subtitle" style="margin-bottom: 0;">Manage users and view system stats.</p>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid" style="margin-bottom: 32px;">
+      <div class="stat-card stat-disabled" style="opacity: 1; pointer-events: auto;">
+        <div class="stat-icon">👥</div>
+        <h3 id="statTotalUsers">-</h3>
+        <p>Total Users</p>
+      </div>
+      <div class="stat-card stat-disabled" style="opacity: 1; pointer-events: auto;">
+        <div class="stat-icon">🟢</div>
+        <h3 id="statOnlineUsers">-</h3>
+        <p>Online Now</p>
+      </div>
+      <div class="stat-card stat-disabled" style="opacity: 1; pointer-events: auto;">
+        <div class="stat-icon">💬</div>
+        <h3 id="statTotalMessages">-</h3>
+        <p>Messages Sent</p>
+      </div>
+      <div class="stat-card stat-disabled" style="opacity: 1; pointer-events: auto;">
+        <div class="stat-icon">🚫</div>
+        <h3 id="statBannedUsers">-</h3>
+        <p>Banned Users</p>
+      </div>
+    </div>
+
+    <!-- User Management Table -->
+    <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 24px; backdrop-filter: blur(24px);">
+      <h2 style="margin-bottom: 20px;">User Management</h2>
+      
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 13px; text-transform: uppercase;">
+              <th style="padding: 12px;">User</th>
+              <th style="padding: 12px;">Contact</th>
+              <th style="padding: 12px;">Status</th>
+              <th style="padding: 12px; text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+            <tr><td colspan="4" style="padding: 20px; text-align: center;">Loading users...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

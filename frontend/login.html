@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="brand">💬</div>
+    <h2>Welcome back</h2>
+    <p class="subtitle" style="margin-bottom: 0;">
+      Sign in with your email or phone number.
+    </p>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="input-group">
+        <label for="identifier">Email or Phone</label>
+        <input type="text" id="identifier" name="identifier"
+               placeholder="you@example.com or +919876543210"
+               required autocomplete="username">
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="••••••••" required minlength="6"
+               autocomplete="current-password">
+      </div>
+
+      <!-- Forgot Password Link -->
+      <div style="text-align: right; margin-top: -4px; margin-bottom: 8px;">
+        <a href="forgot-password.html" style="font-size: 13px;">Forgot password?</a>
+      </div>
+
+      <button type="submit" id="submitBtn">Sign In</button>
+    </form>
+
+    <p id="msg"></p>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="register.html">Create one</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
