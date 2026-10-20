@@ -124,6 +124,10 @@ function updateOnlineStatuses() {
 
 async function openChat(userId) {
   activeChatId = userId;
+  
+  // MAGIC MOBILE FIX: Trigger the mobile view switch
+  document.body.classList.add('mobile-chat-active');
+
   const user = allUsers.find(u => u._id === userId);
 
   // UI switches
@@ -171,6 +175,23 @@ async function openChat(userId) {
   } catch (err) {
     msgsContainer.innerHTML = '<div style="color:#ef4444;text-align:center;">Failed to load messages.</div>';
   }
+}
+
+// ============================================================
+// CLOSE CHAT (For Mobile Back Button)
+// ============================================================
+function closeChat() {
+  activeChatId = null;
+  
+  // Remove the mobile view class
+  document.body.classList.remove('mobile-chat-active');
+  
+  // Reset the UI elements
+  document.getElementById('noChatSelected').style.display = 'flex';
+  document.getElementById('activeChat').style.display = 'none';
+  
+  // Remove the green highlight from the sidebar
+  document.querySelectorAll('.user-item').forEach(el => el.classList.remove('active'));
 }
 
 function sendMessage() {

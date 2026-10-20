@@ -400,32 +400,9 @@ a:hover {
 }
 
 /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 480px) {
-  .container,
-  .auth-container {
-    padding: 32px 24px;
-    border-radius: var(--radius);
-  }
-
-  h1 { font-size: 32px; }
-  h2 { font-size: 24px; }
-
-  .links {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .links .btn {
-    width: 100%;
-  }
-}
-/* ============================================================
    DASHBOARD — Navbar + Cards
    ============================================================ */
 
-/* Full-width layout for dashboard-style pages */
 body:has(.navbar) {
   display: block;
   padding: 0;
@@ -624,67 +601,75 @@ body:has(.navbar) {
   pointer-events: none;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .navbar { padding: 12px 16px; }
-  .nav-username { display: none; }
-  .dashboard { padding: 24px 16px 60px; }
-  .welcome-card { padding: 28px 20px; flex-direction: column; text-align: center; }
-  .welcome-emoji { font-size: 56px; }
-  .welcome-text h1 { font-size: 24px; }
-}
-
 /* ============================================================
    MOBILE RESPONSIVENESS (Chat & Dashboard)
    ============================================================ */
 
+/* Hide the back button on desktop by default */
+.back-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+  padding-right: 12px;
+  box-shadow: none;
+}
+.back-btn:hover {
+  transform: none;
+  box-shadow: none;
+  background: transparent;
+}
+
 @media (max-width: 768px) {
   /* 1. Navbar adjustments */
-  .navbar {
-    padding: 12px 16px;
-  }
-  .nav-username {
-    display: none; /* Hide username on tiny screens to save space */
-  }
+  .navbar { padding: 12px 16px; }
+  .nav-username { display: none; }
   
   /* 2. Chat Layout adjustments */
   .chat-layout {
-    flex-direction: column; /* Stack sidebar on top of chat */
-    height: calc(100vh - 65px); /* Adjust height for mobile navbar */
+    flex-direction: column;
+    height: calc(100vh - 65px);
   }
 
-  /* Sidebar takes up 40% of the screen on mobile, chat takes 60% */
+  /* Make Sidebar and Chat take full height on mobile */
   .chat-sidebar {
     width: 100%;
-    height: 35%; /* Adjust this to make the user list taller/shorter */
+    height: 100%;
     border-right: none;
-    border-bottom: 1px solid var(--glass-border);
   }
 
   .chat-area {
     width: 100%;
-    height: 65%;
+    height: 100%;
+    display: none; /* Hide chat area by default on mobile */
   }
 
-  /* 3. Chat Messages */
-  .msg {
-    max-width: 85%; /* Make bubbles wider on small screens */
+  /* 3. THE MAGIC: When mobile-chat-active class is added to body */
+  body.mobile-chat-active .chat-sidebar {
+    display: none; /* Hide the user list */
+  }
+  body.mobile-chat-active .chat-area {
+    display: flex; /* Show the chat area */
   }
 
-  /* 4. Dashboard adjustments */
+  /* Show the back button on mobile */
+  .back-btn {
+    display: block;
+  }
+
+  /* 4. Chat Messages */
+  .msg { max-width: 85%; }
+
+  /* 5. Dashboard adjustments */
+  .dashboard { padding: 24px 16px 60px; }
   .welcome-card {
     flex-direction: column;
     text-align: center;
     padding: 24px 16px;
   }
-  .welcome-emoji {
-    font-size: 48px;
-  }
-  .welcome-text h1 {
-    font-size: 24px;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr; /* Make dashboard cards stack vertically */
-  }
+  .welcome-emoji { font-size: 48px; }
+  .welcome-text h1 { font-size: 24px; }
+  .stats-grid { grid-template-columns: 1fr; }
 }
