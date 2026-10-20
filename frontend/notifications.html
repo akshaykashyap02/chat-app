@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications — Chat App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="dashboard.html" class="nav-brand">
+      <span class="nav-logo">💬</span>
+      <span>Chat App</span>
+    </a>
+    <div class="nav-user">
+      <div class="avatar" id="navAvatar">?</div>
+      <span class="nav-username" id="navUsername">Loading...</span>
+      <button class="nav-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard" style="max-width: 800px;">
+    <div class="welcome-card" style="margin-bottom: 24px;">
+      <div class="welcome-text">
+        <h1>🔔 Notifications</h1>
+        <p class="subtitle" style="margin-bottom: 0;">Your recent messages and activity.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card" style="opacity: 1; pointer-events: auto; cursor: default;">
+        <h3>No new notifications</h3>
+        <p>When someone messages you, it will show up here.</p>
+      </div>
+    </div>
+    
+    <div style="margin-top: 24px; text-align: center;">
+      <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+    if (requireAuth()) {
+      const user = getUser();
+      document.getElementById('navAvatar').textContent = getInitials(user.username);
+      document.getElementById('navUsername').textContent = user.username;
+    }
+  </script>
+</body>
+</html>
